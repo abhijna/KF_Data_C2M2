@@ -104,6 +104,18 @@ kf2 <- kf %>%
          -(File.ID:Study.Name_5)) %>% 
   select(-ColID) ## take out this line if you want to see where the id came from. 
   
+##make subject_role_taxonomy.tsv
+#subject_id_namespace    subject_id                         role_id                taxonomy_id
+#cfde_id_namespace:3    [fill this with participant ID]    cfde_subject_role:3     NCBI:txid9606
+uniq_participants <- unique(kf2$Participants.ID)
+length(uniq_participants)
+subroletax_df <- data.frame('subject_id_namespace'='cfde_id_namespace:3',
+                            'subject_id'=uniq_participants,
+                            'role_id'='cfde_subject_role:3',
+                            'taxonomy_id'='NCBI:txid9606')
+dim(subroletax_df)
+head(subroletax_df)
+write.table(subroletax_df, file='~/Desktop/subject_role_taxonomy.tsv', sep='\t', row.names=F, quote=F)
 
   
 ## change this part if you wish to select only first 100 for testing script
