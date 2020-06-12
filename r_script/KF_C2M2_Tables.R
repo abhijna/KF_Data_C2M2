@@ -4,7 +4,7 @@
 ## Some pre-processing: There are a few columns in the KF dataset that need to be changed. You will need to make these changes to the main datasets. 
 ## These columns are: File.Format, Data.type Anatomy. I've changed Experiment.Strategy programmatically.
 ## Refer to this GitHub issue to figure out what values go in there: https://github.com/dib-lab/cfde/issues/61
-## The only post-processing is for biosample.tsv (read notes at the write.table command for biosample)
+## NO POST-PROCESSING REQUIRED!
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## Importing packages here ##
@@ -145,13 +145,8 @@ file_kf <- file_kf %>%
   drop_na(project)
 
 file_kf <- as.data.frame(unclass(file_kf))
+
 write.table(file_kf, file = "~/Desktop/file.tsv", row.names=FALSE, sep="\t", na="", quote = FALSE)
-
-## Fixing last two columns:
-
-unique(file_kf$file_format) ### These need to be replaced with the format number by searching for the terms here https://www.ebi.ac.uk/ols/search?q=Other&groupField=iri&start=0&ontology=edam
-## e.g: instead of 'bam' use 'format:2572'
-unique(file_kf$data_type) ## Add link for this here!
 
 
 #### biosample.tsv #### 
@@ -189,6 +184,9 @@ biosample <- biosample2 %>%
 ## Now change these out with ids from here:
 unique(biosample$assay_type)
 
+## R does not like parantheses inside a string. 
+## So this code takes out everything that's inside parantheses inside a string of assay type
+## It fixes Linked-Read WGS problem. 
 biosample$assay_type <- str_replace(biosample$assay_type, " \\(.*\\)", "")
 
 biosample$assay_type <- as.character(biosample$assay_type)
