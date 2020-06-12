@@ -26,7 +26,6 @@ cfde_id_namespace:3	BS_HE8TAV8R	cfde_id_namespace:3	SD_YGVA0E1C			OBI:0002117	UB
 cfde_id_namespace:3	BS_6TFAJHD1	cfde_id_namespace:3	SD_BHJXBDQK				
 cfde_id_namespace:3	BS_3AKS23A0	cfde_id_namespace:3	SD_DYPMEHHF			OBI:0002117	UBERON:0000479
 cfde_id_namespace:3	BS_Q0H033YR	cfde_id_namespace:3	SD_PREASA7S			OBI:0002117	UBERON:0000178
-cfde_id_namespace:3		cfde_id_namespace:3					
 cfde_id_namespace:3	BS_RN9DRXDC	cfde_id_namespace:3	SD_PREASA7S			OBI:0002117	UBERON:0000178
 cfde_id_namespace:3	BS_JFMZB300	cfde_id_namespace:3	SD_9PYZAHHE			OBI:0002117	UBERON:0000178
 cfde_id_namespace:3	BS_235QEYMQ	cfde_id_namespace:3	SD_BHJXBDQK			OBI:0002117	
@@ -540,7 +539,6 @@ cfde_id_namespace:3	BS_082CXWXG	cfde_id_namespace:3	SD_RM8AFW0R			OBI:0002117	UB
 cfde_id_namespace:3	BS_NHPWBZ7A	cfde_id_namespace:3	SD_PREASA7S			OBI:0002117	UBERON:0000178
 cfde_id_namespace:3	BS_70SGSPD8	cfde_id_namespace:3	SD_BHJXBDQK			OBI:0002117	
 cfde_id_namespace:3	BS_1QSSX52A	cfde_id_namespace:3	SD_9PYZAHHE			OBI:0002117	UBERON:0000178
-cfde_id_namespace:3		cfde_id_namespace:3				OBI:0001271	
 cfde_id_namespace:3	BS_3HMJGD79	cfde_id_namespace:3	SD_YGVA0E1C			OBI:0002117	UBERON:0001836
 cfde_id_namespace:3	BS_6KQA5M8S	cfde_id_namespace:3	SD_R0EPRSGS			OBI:0002117	UBERON:0000178
 cfde_id_namespace:3	BS_H4NXBD2D	cfde_id_namespace:3	SD_BHJXBDQK			OBI:0001271	UBERON:0000479
@@ -1081,7 +1079,6 @@ cfde_id_namespace:3	BS_E60JZ9Z3	cfde_id_namespace:3	SD_BHJXBDQK			OBI:0001271
 cfde_id_namespace:3	BS_2H9H06BD	cfde_id_namespace:3	SD_YNSSAPHE			OBI:0002118	UBERON:0000479
 cfde_id_namespace:3	BS_V4VGG98Y	cfde_id_namespace:3	SD_DYPMEHHF			OBI:0002117	
 cfde_id_namespace:3	BS_E5BKGTVD	cfde_id_namespace:3	SD_RM8AFW0R			OBI:0002117	UBERON:0000178
-cfde_id_namespace:3		cfde_id_namespace:3					
 cfde_id_namespace:3	BS_6HNXG8Q3	cfde_id_namespace:3	SD_7NQ9151J			OBI:0002117	UBERON:0001836
 cfde_id_namespace:3	BS_NMQTPVFW	cfde_id_namespace:3	SD_BHJXBDQK			OBI:0002117	
 cfde_id_namespace:3	BS_NH9XV2FR	cfde_id_namespace:3	SD_RM8AFW0R			OBI:0002117	UBERON:0000178

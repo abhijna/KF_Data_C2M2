@@ -108,7 +108,7 @@ kf2 <- kf %>%
 ## change this part if you wish to select only first 100 for testing script
 
 test_kf <- kf2 # kf[1:100,]
-
+head(test_kf)
 
 #### file.tsv ####
 
@@ -127,7 +127,9 @@ file_kf <- test_kf %>%
 unique(file_kf$data_type)
 unique(file_kf$file_format) # They do!
 
-file_kf <- drop_na(file_kf, id)
+file_kf <- file_kf %>% 
+  drop_na(id) %>% 
+  drop_na(project)
 
 file_kf <- as.data.frame(unclass(file_kf))
 write.table(file_kf, file = "~/Desktop/file.tsv", row.names=FALSE, sep="\t", na="", quote = FALSE)
@@ -194,6 +196,11 @@ unique(biosample$assay_type)
 
 # Sanity check
 nrow(biosample)==length(unique(biosample$id)) ## FAILED! By about 100 rows. Probably due to unique combinations.
+
+## Take out empty rows in id column
+biosample <- biosample %>% 
+  drop_na(id) %>% 
+  drop_na(project)
 
 ## Change everything back to factor. If you don't there are "" around everything. And this breaks the model. Sigh
 biosample <- as.data.frame(unclass(biosample))
