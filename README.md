@@ -19,8 +19,9 @@ It will produce these four green tables for Level 1: `file_format.tsv`,`data_typ
 The term-scanner script is named `build_term_tables.py` and you can run it like so:
 
 ```
-# with default directory locations
-./model/build_term_tables.py
+# with default directory locations: change directory to `model`
+./model
+python build_term_tables.py
 
 # full command, if not using any default paths
 ./build_term_tables.py --draftDir [path/to/tsv/file/dir] --cvRefDir [path/to/external/CV/ref/files/dir] --outDir [dir/path/where/you/want/outputs/saved]
