@@ -9,8 +9,9 @@
 
 ## Importing packages here ##
   
-require(tidyverse)
+library(tidyverse)
 library(splitstackshape)
+library(stringr)
 
 #### Importing KF data ####
 ## The required columns are spread across a couple of different datset, so import them all, 
@@ -169,11 +170,14 @@ biosample <- biosample2 %>%
          project = Study.ID,
          assay_type = Experiment.Strategy,
          anatomy = Composition) %>%
-  distinct()
+  distinct() 
+  
 
 
 ## Now change these out with ids from here:
 unique(biosample$assay_type)
+
+biosample$assay_type <- str_replace(biosample$assay_type, " \\(.*\\)", "")
 
 biosample$assay_type <- as.character(biosample$assay_type)
 biosample <- biosample %>% 
@@ -188,19 +192,29 @@ biosample <- biosample %>%
   mutate_if(is.character, 
             str_replace_all, pattern = "Linked-Read WGS", replacement = "OBI:0002117") %>% 
   mutate_if(is.character, 
-            str_replace_all, pattern = "(10x Chromium)", replacement = "") %>% 
-  mutate_if(is.character, 
-            str_replace_all, pattern = "WGS", replacement = "OBI:0002117")
+            str_replace_all, pattern = "WGS", replacement = "OBI:0002117") 
 
-unique(biosample$assay_type)
 
 # Sanity check
 nrow(biosample)==length(unique(biosample$id)) ## FAILED! By about 100 rows. Probably due to unique combinations.
 
-## Take out empty rows in id column
+## Take out empty rows in id, project, assay type column
 biosample <- biosample %>% 
   drop_na(id) %>% 
-  drop_na(project)
+  drop_na(project) %>% 
+  distinct() 
+
+## This code was written by Marisa Lim to fix duplicate rows!
+
+df_nodups <- biosample[!duplicated(biosample$id),]
+dim(df_nodups) #17088
+length(unique(df_nodups$id)) #17088
+df_nodups[df_nodups$id == 'BS_01BDZ0TW',] #only 1 entry now
+
+biosample <- df_nodups
+#Sanity check
+nrow(biosample)==length(unique(biosample$id)) ## FAILED! By about 100 rows. Probably due to unique combinations.
+
 
 ## Change everything back to factor. If you don't there are "" around everything. And this breaks the model. Sigh
 biosample <- as.data.frame(unclass(biosample))
