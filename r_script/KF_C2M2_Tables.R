@@ -16,11 +16,12 @@ library(splitstackshape)
 ## The required columns are spread across a couple of different datset, so import them all, 
 ## select columns you need and merge into on dataset
 ## I don't use kf3 for anything, but it's there now and I don't want to change all the variable names.
+setwd("/Users/abhijnaparigi/Desktop/GitHub/KF_Data_C2M2/raw_data")
 
-kf1 <- read.table(file = '../raw_data/Kids_First_data/kf_data.tsv', sep = '\t', header = TRUE)
-kf2 <- read.table(file = "../raw_data/Kids_First_data/kidsfirst-participant-family-manifest_2020-06-03.tsv", sep = '\t', header = TRUE)
-kf3 <- read.table(file = "../raw_data/Kids_First_data/participant_clinical_20200608.tsv", sep = '\t', header = TRUE, fill = TRUE)
-kf4 <- read.table(file = "../raw_data/Kids_First_data/participants_biospecimen_20200608.tsv", sep = '\t', header = TRUE)
+kf1 <- read.table(file = 'kf_data.tsv', sep = '\t', header = TRUE)
+kf2 <- read.table(file = "kidsfirst-participant-family-manifest_2020-06-03.tsv", sep = '\t', header = TRUE)
+kf3 <- read.table(file = "participant_clinical_20200608.tsv", sep = '\t', header = TRUE, fill = TRUE)
+kf4 <- read.table(file = "participants_biospecimen_20200608.tsv", sep = '\t', header = TRUE)
 
 ## need to change some columns to character strings before we can join and do other data wrangling
 
