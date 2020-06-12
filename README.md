@@ -20,7 +20,7 @@ The term-scanner script is named `build_term_tables.py` and you can run it like 
 
 ```
 # with default directory locations: change directory to `model`
-./model
+cd ./model
 python build_term_tables.py
 
 # full command, if not using any default paths
