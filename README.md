@@ -1,3 +1,22 @@
+# Processing KidsFirst data for input in C2M2 model to produce Level 1 tables
+
+## Download data from the KidsFirst (KF) portal
+
+* Visit the KF portal website: https://portal.kidsfirstdrc.org/dashboard
+* Log in using your Orchid ID (preferred), gmail or facebook.
+* Select the `File Repository` tab on the main navigation bar at the top of the website.
+ insert image here!
+
+* Data can and must be downloaded a couple of different ways:
+  - Click the columns option and select all columns. Click `Export TSV`.
+  - Click `Download` and choose the option `File Manifest` at the bottom of the dropdown menu.
+  - **marisa add how you downloaded the other dataset here**
+
+* Initial preprocessing: remove all the columns that do NOT have any headers.
+* Select KF column names that correspond to the right C2M2 table ids.
+
+  -
+
 # Building 'green' tables from core entity tables
 
 This term-scanner script is used to auto-generate the green tables for the C2M2 Model [Level 1 model](https://github.com/nih-cfde/specifications-and-documentation/tree/master/draft-C2M2_specification_with_Levels#Level-1). Currently, this script generates four of the five green tables for Level 1.

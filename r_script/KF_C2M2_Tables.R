@@ -7,8 +7,8 @@
 ## NO POST-PROCESSING REQUIRED!
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
-## Importing packages here ##
-  
+## Importing packages here
+
 library(tidyverse)
 library(splitstackshape)
 library(stringr)
@@ -56,11 +56,15 @@ kf$md5 <- rep("", nrow(kf))
 kf$description <- rep("", nrow(kf))
 kf$abbreviation <- rep("",nrow(kf))
 
-## This value is the same for every cell of it'\s column.
+
+## This value is the same for every cell of it's column.
 
 kf$project_id_namespace <- rep("cfde_id_namespace:3", nrow(kf))
 kf$id_namespace <- rep("cfde_id_namespace:3", nrow(kf))
 kf$granularity <- rep("cfde_subject_granularity:0", nrow(kf))
+kf$file_id_namespace <- rep("cfde_id_namespace:3",nrow(kf))
+kf$biosample_id_namespace <- rep("cfde_id_namespace:3",nrow(kf))
+test_kf$subject_id_namespace <- rep("cfde_id_namespace:3",nrow(kf))
 
 ## Take out all the missing data that looks like this "--"
 ## There are some repeated rows in the column called Study.ID and experimental strategy 
@@ -130,7 +134,7 @@ file_kf <- test_kf %>%
          creation_time, File.Size, sha256, md5, File.Name, File.Format, Data.Type) %>% 
   rename (id = File.ID,
           project = Study.ID,
-          size_in_bytes = File.Size,
+          size_in_bytes  = File.Size,
           filename = File.Name,
           file_format = File.Format,
           data_type = Data.Type) %>% 
@@ -233,6 +237,31 @@ biosample <- as.data.frame(unclass(biosample))
 ## Gotta take out parantheses from here: OBI:0002117 (). I can't figure out how to make R do it!
 write.table(biosample, file = "~/Desktop/biosample.tsv", row.names=FALSE, sep="\t", na="", quote = FALSE)
 
+
+
+#### files_describes_biosample ####
+
+## move these two lines of code to the top asap!
+
+files_describes_biosample <- test_kf %>% 
+  select(file_id_namespace, File.ID, biosample_id_namespace, Biospecimen.ID_1) %>% 
+  rename (file_local_id = File.ID,
+          biosample_local_id = Biospecimen.ID_1) %>% 
+  distinct()
+
+## Check to make sure file format and data type make sense
+length(unique(files_describes_biosample$file_local_id)) == nrow(files_describes_biosample)
+
+files_describes_biosample <- files_describes_biosample %>% 
+  drop_na(file_local_id) %>% 
+  drop_na(biosample_local_id)
+
+files_describes_biosample <- as.data.frame(unclass(files_describes_biosample))
+
+write.table(files_describes_biosample, file = "~/Desktop/files_describes_biosample.tsv", row.names=FALSE, sep="\t", na="", quote = FALSE)
+
+
+
 #### subject.tsv #### 
 
 subject <- test_kf %>% 
@@ -247,6 +276,36 @@ nrow(subject) == length(unique(subject$id))
 
 subject <- as.data.frame(unclass(subject))
 write.table(subject, file = "~/Desktop/subject.tsv", row.names=FALSE, sep="\t", na="", quote = FALSE)
+
+
+
+
+#### biosample_from_subject ####
+
+biosample_from_subject <- test_kf %>% 
+  select(biosample_id_namespace, Biospecimen.ID_1, subject_id_namespace, Participants.ID) %>% 
+  rename (subject_local_id = Participants.ID,
+          biosample_local_id = Biospecimen.ID_1) %>% 
+  distinct()
+
+## Check to make sure file format and data type make sense
+length(unique(biosample_from_subject$biosample_local_id)) == nrow(biosample_from_subject)
+
+biosample_from_subject <- biosample_from_subject %>% 
+  drop_na(subject_local_id) %>% 
+  drop_na(biosample_local_id)
+
+biosample_from_subject <- biosample_from_subject[!duplicated(biosample_from_subject$biosample_local_id),]
+dim(biosample_from_subject) #17088
+length(unique(biosample_from_subject$biosample_local_id)) #17088
+biosample_from_subject[biosample_from_subject$biosample_local_id == 'BS_JR1T2QVX',] #only 1 entry now
+
+biosample_from_subject <- as.data.frame(unclass(biosample_from_subject))
+
+write.table(biosample_from_subject, file = "~/Desktop/biosample_from_subject.tsv", row.names=FALSE, sep="\t", na="", quote = FALSE)
+
+
+
 
 
 #### project.tsv #### 
